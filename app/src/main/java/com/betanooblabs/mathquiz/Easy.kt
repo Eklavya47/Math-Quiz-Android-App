@@ -22,7 +22,7 @@ object Easy {
                 else -> num1 / num2
             }
         }catch (e: ArithmeticException){
-            777777
+            77777777
         }
 
         return Pair(question, answer)
