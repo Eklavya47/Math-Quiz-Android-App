@@ -3,7 +3,7 @@ package com.betanooblabs.mathquiz
 import android.R
 import kotlin.random.Random
 
-class QuestionList(private val questionType: String) {
+class QuestionList(private val questionType: String?) {
 
     private var questionList = ArrayList<Pair<String, Int>>(10)
     private var questionDataList = ArrayList<Question>(10)
