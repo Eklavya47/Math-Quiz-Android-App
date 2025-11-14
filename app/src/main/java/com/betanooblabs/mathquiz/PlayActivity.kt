@@ -1,9 +1,12 @@
 package com.betanooblabs.mathquiz
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.betanooblabs.mathquiz.databinding.ActivityPlayBinding
 
 class PlayActivity : AppCompatActivity() {
@@ -19,7 +22,11 @@ class PlayActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityPlayBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.play)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         val questionType = intent.getStringExtra("questionType")
         questionDataList = QuestionList(questionType).getQuestionList()
         setGivenTime(questionType)
@@ -107,6 +114,10 @@ class PlayActivity : AppCompatActivity() {
     }
 
     private fun endGame(){
+        val intent = Intent(this, FinishActivity::class.java)
+        intent.putExtra("score", score)
+        intent.putExtra("dataSet", questionDataList)
+        startActivity(intent)
         finish()
         timer?.cancel()
         timer = null

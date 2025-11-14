@@ -1,5 +1,7 @@
 package com.betanooblabs.mathquiz
 
+import java.io.Serializable
+
 data class Question(
     val problem: String,
     val answer: String,
@@ -8,4 +10,4 @@ data class Question(
     val option3: String,
     val option4: String,
     var selectedOption: String
-)
+): Serializable

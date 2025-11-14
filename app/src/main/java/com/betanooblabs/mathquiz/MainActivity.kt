@@ -15,7 +15,11 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         binding?.btnEasy?.setOnClickListener { startGame("easy") }
         binding?.btnMedium?.setOnClickListener { startGame("medium") }
         binding?.btnHard?.setOnClickListener { startGame("hard") }
